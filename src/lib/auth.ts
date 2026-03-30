@@ -1,4 +1,4 @@
-import { betterAuth } from 'better-auth';
+import { betterAuth } from 'better-auth/minimal';
 
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { prisma } from '../../prisma/client.js';
@@ -20,6 +20,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
+    disableSignUp: true,
   },
   trustedOrigins: ['http://localhost:5173'],
   advanced: {
@@ -29,3 +30,6 @@ export const auth = betterAuth({
     },
   },
 });
+
+//  email: 'admin-aow@aow.ru', // required
+//       password: 'admin-aow12345', // required

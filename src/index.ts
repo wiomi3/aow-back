@@ -1,6 +1,7 @@
 import { Hono } from 'hono';
 import { auth } from './lib/auth.js';
 import { cors } from 'hono/cors';
+import { prisma } from '../prisma/client.js';
 
 const app = new Hono<{
   Variables: {
