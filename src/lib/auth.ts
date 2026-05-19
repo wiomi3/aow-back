@@ -32,4 +32,4 @@ export const auth = betterAuth({
 });
 
 //  email: 'admin-aow@aow.ru', // required
-//       password: 'admin-aow12345', // required
+//  password: 'admin-aow12345', // required
