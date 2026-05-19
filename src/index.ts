@@ -13,12 +13,12 @@ const app = new OpenAPIHono<{
 
 // CORS MUST come before routes
 app.use(
-  '/api/auth/*',
+  '*',
   cors({
-    origin: 'http://localhost:5173', // Vite dev server port
-    allowHeaders: ['Content-Type', 'Authorization'],
-    allowMethods: ['POST', 'GET', 'OPTIONS'],
-    credentials: true, // Required for cookies
+    origin: 'http://localhost:5173',
+    allowHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+    allowMethods: ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'],
+    credentials: true,
   })
 );
 
@@ -83,7 +83,7 @@ app.get('/api/me', (c) => {
 const welcomeStrings = [
   'Hello Hono!',
   'To learn more about Hono on Vercel, visit https://vercel.com/docs/frameworks/backend/hono',
-  'Swagger docs available at /swagger-ui'
+  'Swagger docs available at /swagger-ui',
 ];
 
 app.get('/', (c) => {
