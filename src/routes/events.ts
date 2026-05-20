@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { prisma } from '../../prisma/client.js';
-import { EventSchema } from './schemas.js';
+import { EventSchema } from '../schemas.js';
 
 const events = new OpenAPIHono();
 

@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { prisma } from '../../../prisma/client.js';
-import { LocationSchema } from '../schemas.js';
+import { LocationSchema, locationInputSchema } from '../../schemas.js';
 
 const locations = new OpenAPIHono();
 
@@ -26,10 +26,7 @@ const createLocationRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: z.object({
-            name: z.string(),
-            address: z.string(),
-          }),
+          schema: locationInputSchema,
         },
       },
     },
@@ -56,10 +53,7 @@ const updateLocationRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: z.object({
-            name: z.string(),
-            address: z.string(),
-          }),
+          schema: locationInputSchema,
         },
       },
     },

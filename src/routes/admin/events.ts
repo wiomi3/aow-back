@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { prisma } from '../../../prisma/client.js';
-import { EventSchema } from '../schemas.js';
+import { EventSchema, eventInputSchema } from '../../schemas.js';
 
 const events = new OpenAPIHono();
 
@@ -40,16 +40,6 @@ async function checkCollisions(
   return null;
 }
 
-const CreateEventSchema = z.object({
-  title: z.string(),
-  description: z.string().nullable().optional(),
-  startAt: z.iso.datetime(),
-  endAt: z.iso.datetime(),
-  typeId: z.string().uuid(),
-  locationId: z.string().uuid().nullable().optional(),
-  employeeIds: z.array(z.string().uuid()).optional(),
-});
-
 const createEventRoute = createRoute({
   method: 'post',
   path: '/',
@@ -57,7 +47,7 @@ const createEventRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: CreateEventSchema,
+          schema: eventInputSchema,
         },
       },
     },
@@ -82,7 +72,7 @@ const updateEventRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: CreateEventSchema,
+          schema: eventInputSchema,
         },
       },
     },

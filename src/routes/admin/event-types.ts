@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { prisma } from '../../../prisma/client.js';
-import { EventTypeSchema } from '../schemas.js';
+import { EventTypeSchema, eventTypeInputSchema } from '../../schemas.js';
 
 const eventTypes = new OpenAPIHono();
 
@@ -22,10 +22,7 @@ const createEventTypeRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: z.object({
-            name: z.string(),
-            color: z.string(),
-          }),
+          schema: eventTypeInputSchema,
         },
       },
     },
@@ -46,10 +43,7 @@ const updateEventTypeRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: z.object({
-            name: z.string(),
-            color: z.string(),
-          }),
+          schema: eventTypeInputSchema,
         },
       },
     },

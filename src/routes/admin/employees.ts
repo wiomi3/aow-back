@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { prisma } from '../../../prisma/client.js';
-import { EmployeeSchema } from '../schemas.js';
+import { EmployeeSchema, employeeInputSchema } from '../../schemas.js';
 
 const employees = new OpenAPIHono();
 
@@ -22,10 +22,7 @@ const createEmployeeRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: z.object({
-            name: z.string(),
-            employeeTypeId: z.string().uuid(),
-          }),
+          schema: employeeInputSchema,
         },
       },
     },
@@ -46,10 +43,7 @@ const updateEmployeeRoute = createRoute({
     body: {
       content: {
         'application/json': {
-          schema: z.object({
-            name: z.string(),
-            employeeTypeId: z.string().uuid(),
-          }),
+          schema: employeeInputSchema,
         },
       },
     },

@@ -78,9 +78,8 @@ model Verification {
   @@map("verification")
 }
 
-// Типы сотрудников (специализации): "Певец", "Разнорабочий", "Аниматор"
 model EmployeeType {
-  id        String     @id @default(cuid())
+  id        String     @id @default(uuid())
   name      String     @unique
   employees Employee[]
 
@@ -89,7 +88,7 @@ model EmployeeType {
 }
 
 model Employee {
-  id             String       @id @default(cuid())
+  id             String       @id @default(uuid())
   name           String
   employeeType   EmployeeType @relation(fields: [employeeTypeId], references: [id])
   employeeTypeId String
@@ -100,7 +99,7 @@ model Employee {
 }
 
 model EventType {
-  id     String  @id @default(cuid())
+  id     String  @id @default(uuid())
   name   String  @unique // "Репетиция", "Концерт"
   color  String // HEX для UI
   events Event[]
@@ -110,9 +109,9 @@ model EventType {
 }
 
 model Location {
-  id      String  @id @default(cuid())
+  id      String  @id @default(uuid())
   name    String  @unique
-  address String?
+  address String
   events  Event[]
 
   createdAt DateTime @default(now())
@@ -120,12 +119,9 @@ model Location {
 }
 
 model Event {
-  id          String  @id @default(cuid())
+  id          String  @id @default(uuid())
   title       String
-  description String? @db.Text
-
-  // Ссылка на изображение (URL из хранилища, например, S3 или Cloudinary)
-  imageUrl String?
+  description String?
 
   startAt DateTime
   endAt   DateTime
