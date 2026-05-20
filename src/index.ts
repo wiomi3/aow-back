@@ -15,7 +15,8 @@ const app = new OpenAPIHono<{
 app.use(
   '*',
   cors({
-    origin: 'http://localhost:5173',
+    // origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'https://aow-front.vercel.app'],
     allowHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
     allowMethods: ['POST', 'GET', 'OPTIONS', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
