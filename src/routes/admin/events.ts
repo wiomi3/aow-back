@@ -40,6 +40,87 @@ async function checkCollisions(
   return null;
 }
 
+const getEventsRoute = createRoute({
+  method: 'get',
+  path: '/',
+  request: {
+    query: z.object({
+      start: z.string().optional(),
+      end: z.string().optional(),
+    }),
+  },
+  responses: {
+    200: {
+      content: { 'application/json': { schema: z.array(EventSchema) } },
+      description: 'Get all events',
+    },
+  },
+});
+
+const getEventByIdRoute = createRoute({
+  method: 'get',
+  path: '/{id}',
+  request: {
+    params: z.object({ id: z.string().uuid() }),
+  },
+  responses: {
+    200: {
+      content: { 'application/json': { schema: EventSchema } },
+      description: 'Get event by id',
+    },
+    404: {
+      content: { 'application/json': { schema: z.object({ error: z.string() }) } },
+      description: 'Event not found',
+    },
+  },
+});
+
+events.openapi(getEventsRoute, async (c) => {
+  const { start, end } = c.req.valid('query');
+
+  const whereClause: any = {};
+  if (start && end) {
+    whereClause.AND = [{ startAt: { lt: new Date(end) } }, { endAt: { gt: new Date(start) } }];
+  }
+
+  const data = await prisma.event.findMany({
+    where: whereClause,
+    include: {
+      type: true,
+      location: true,
+      employees: {
+        include: {
+          employeeType: true,
+        },
+      },
+    },
+  });
+
+  return c.json(data as any);
+});
+
+events.openapi(getEventByIdRoute, async (c) => {
+  const { id } = c.req.valid('param');
+
+  const data = await prisma.event.findUnique({
+    where: { id },
+    include: {
+      type: true,
+      location: true,
+      employees: {
+        include: {
+          employeeType: true,
+        },
+      },
+    },
+  });
+
+  if (!data) {
+    return c.json({ error: 'Event not found' }, 404);
+  }
+
+  return c.json(data as any);
+});
 const createEventRoute = createRoute({
   method: 'post',
   path: '/',
