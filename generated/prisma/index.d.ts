@@ -58,6 +58,11 @@ export type Location = $Result.DefaultSelection<Prisma.$LocationPayload>
  * 
  */
 export type Event = $Result.DefaultSelection<Prisma.$EventPayload>
+/**
+ * Model AdditionalOrgs
+ * 
+ */
+export type AdditionalOrgs = $Result.DefaultSelection<Prisma.$AdditionalOrgsPayload>
 
 /**
  * Enums
@@ -286,6 +291,16 @@ export class PrismaClient<
     * ```
     */
   get event(): Prisma.EventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.additionalOrgs`: Exposes CRUD operations for the **AdditionalOrgs** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdditionalOrgs
+    * const additionalOrgs = await prisma.additionalOrgs.findMany()
+    * ```
+    */
+  get additionalOrgs(): Prisma.AdditionalOrgsDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -728,7 +743,8 @@ export namespace Prisma {
     Employee: 'Employee',
     EventType: 'EventType',
     Location: 'Location',
-    Event: 'Event'
+    Event: 'Event',
+    AdditionalOrgs: 'AdditionalOrgs'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -744,7 +760,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "account" | "verification" | "employeeType" | "employee" | "eventType" | "location" | "event"
+      modelProps: "user" | "session" | "account" | "verification" | "employeeType" | "employee" | "eventType" | "location" | "event" | "additionalOrgs"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1414,6 +1430,80 @@ export namespace Prisma {
           }
         }
       }
+      AdditionalOrgs: {
+        payload: Prisma.$AdditionalOrgsPayload<ExtArgs>
+        fields: Prisma.AdditionalOrgsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdditionalOrgsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdditionalOrgsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>
+          }
+          findFirst: {
+            args: Prisma.AdditionalOrgsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdditionalOrgsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>
+          }
+          findMany: {
+            args: Prisma.AdditionalOrgsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>[]
+          }
+          create: {
+            args: Prisma.AdditionalOrgsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>
+          }
+          createMany: {
+            args: Prisma.AdditionalOrgsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdditionalOrgsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>[]
+          }
+          delete: {
+            args: Prisma.AdditionalOrgsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>
+          }
+          update: {
+            args: Prisma.AdditionalOrgsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdditionalOrgsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdditionalOrgsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdditionalOrgsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdditionalOrgsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdditionalOrgsPayload>
+          }
+          aggregate: {
+            args: Prisma.AdditionalOrgsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdditionalOrgs>
+          }
+          groupBy: {
+            args: Prisma.AdditionalOrgsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdditionalOrgsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdditionalOrgsCountArgs<ExtArgs>
+            result: $Utils.Optional<AdditionalOrgsCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1531,6 +1621,7 @@ export namespace Prisma {
     eventType?: EventTypeOmit
     location?: LocationOmit
     event?: EventOmit
+    additionalOrgs?: AdditionalOrgsOmit
   }
 
   /* Types for Logging */
@@ -1776,10 +1867,12 @@ export namespace Prisma {
 
   export type EventCountOutputType = {
     employees: number
+    additionalOrgs: number
   }
 
   export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     employees?: boolean | EventCountOutputTypeCountEmployeesArgs
+    additionalOrgs?: boolean | EventCountOutputTypeCountAdditionalOrgsArgs
   }
 
   // Custom InputTypes
@@ -1798,6 +1891,44 @@ export namespace Prisma {
    */
   export type EventCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmployeeWhereInput
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountAdditionalOrgsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdditionalOrgsWhereInput
+  }
+
+
+  /**
+   * Count Type AdditionalOrgsCountOutputType
+   */
+
+  export type AdditionalOrgsCountOutputType = {
+    events: number
+  }
+
+  export type AdditionalOrgsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | AdditionalOrgsCountOutputTypeCountEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdditionalOrgsCountOutputType without action
+   */
+  export type AdditionalOrgsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgsCountOutputType
+     */
+    select?: AdditionalOrgsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdditionalOrgsCountOutputType without action
+   */
+  export type AdditionalOrgsCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
   }
 
 
@@ -10733,6 +10864,7 @@ export namespace Prisma {
     type?: boolean | EventTypeDefaultArgs<ExtArgs>
     location?: boolean | Event$locationArgs<ExtArgs>
     employees?: boolean | Event$employeesArgs<ExtArgs>
+    additionalOrgs?: boolean | Event$additionalOrgsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
@@ -10781,6 +10913,7 @@ export namespace Prisma {
     type?: boolean | EventTypeDefaultArgs<ExtArgs>
     location?: boolean | Event$locationArgs<ExtArgs>
     employees?: boolean | Event$employeesArgs<ExtArgs>
+    additionalOrgs?: boolean | Event$additionalOrgsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10798,6 +10931,7 @@ export namespace Prisma {
       type: Prisma.$EventTypePayload<ExtArgs>
       location: Prisma.$LocationPayload<ExtArgs> | null
       employees: Prisma.$EmployeePayload<ExtArgs>[]
+      additionalOrgs: Prisma.$AdditionalOrgsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -11206,6 +11340,7 @@ export namespace Prisma {
     type<T extends EventTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventTypeDefaultArgs<ExtArgs>>): Prisma__EventTypeClient<$Result.GetResult<Prisma.$EventTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     location<T extends Event$locationArgs<ExtArgs> = {}>(args?: Subset<T, Event$locationArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     employees<T extends Event$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Event$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    additionalOrgs<T extends Event$additionalOrgsArgs<ExtArgs> = {}>(args?: Subset<T, Event$additionalOrgsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11688,6 +11823,30 @@ export namespace Prisma {
   }
 
   /**
+   * Event.additionalOrgs
+   */
+  export type Event$additionalOrgsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    where?: AdditionalOrgsWhereInput
+    orderBy?: AdditionalOrgsOrderByWithRelationInput | AdditionalOrgsOrderByWithRelationInput[]
+    cursor?: AdditionalOrgsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdditionalOrgsScalarFieldEnum | AdditionalOrgsScalarFieldEnum[]
+  }
+
+  /**
    * Event without action
    */
   export type EventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11703,6 +11862,1094 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdditionalOrgs
+   */
+
+  export type AggregateAdditionalOrgs = {
+    _count: AdditionalOrgsCountAggregateOutputType | null
+    _min: AdditionalOrgsMinAggregateOutputType | null
+    _max: AdditionalOrgsMaxAggregateOutputType | null
+  }
+
+  export type AdditionalOrgsMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    phone: string | null
+    contactName: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdditionalOrgsMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    phone: string | null
+    contactName: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdditionalOrgsCountAggregateOutputType = {
+    id: number
+    name: number
+    phone: number
+    contactName: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdditionalOrgsMinAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    contactName?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdditionalOrgsMaxAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    contactName?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdditionalOrgsCountAggregateInputType = {
+    id?: true
+    name?: true
+    phone?: true
+    contactName?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdditionalOrgsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdditionalOrgs to aggregate.
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdditionalOrgs to fetch.
+     */
+    orderBy?: AdditionalOrgsOrderByWithRelationInput | AdditionalOrgsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdditionalOrgsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdditionalOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdditionalOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdditionalOrgs
+    **/
+    _count?: true | AdditionalOrgsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdditionalOrgsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdditionalOrgsMaxAggregateInputType
+  }
+
+  export type GetAdditionalOrgsAggregateType<T extends AdditionalOrgsAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdditionalOrgs]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdditionalOrgs[P]>
+      : GetScalarType<T[P], AggregateAdditionalOrgs[P]>
+  }
+
+
+
+
+  export type AdditionalOrgsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdditionalOrgsWhereInput
+    orderBy?: AdditionalOrgsOrderByWithAggregationInput | AdditionalOrgsOrderByWithAggregationInput[]
+    by: AdditionalOrgsScalarFieldEnum[] | AdditionalOrgsScalarFieldEnum
+    having?: AdditionalOrgsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdditionalOrgsCountAggregateInputType | true
+    _min?: AdditionalOrgsMinAggregateInputType
+    _max?: AdditionalOrgsMaxAggregateInputType
+  }
+
+  export type AdditionalOrgsGroupByOutputType = {
+    id: string
+    name: string
+    phone: string
+    contactName: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AdditionalOrgsCountAggregateOutputType | null
+    _min: AdditionalOrgsMinAggregateOutputType | null
+    _max: AdditionalOrgsMaxAggregateOutputType | null
+  }
+
+  type GetAdditionalOrgsGroupByPayload<T extends AdditionalOrgsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdditionalOrgsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdditionalOrgsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdditionalOrgsGroupByOutputType[P]>
+            : GetScalarType<T[P], AdditionalOrgsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdditionalOrgsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    contactName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    events?: boolean | AdditionalOrgs$eventsArgs<ExtArgs>
+    _count?: boolean | AdditionalOrgsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["additionalOrgs"]>
+
+  export type AdditionalOrgsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    contactName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["additionalOrgs"]>
+
+  export type AdditionalOrgsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    contactName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["additionalOrgs"]>
+
+  export type AdditionalOrgsSelectScalar = {
+    id?: boolean
+    name?: boolean
+    phone?: boolean
+    contactName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdditionalOrgsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "contactName" | "createdAt" | "updatedAt", ExtArgs["result"]["additionalOrgs"]>
+  export type AdditionalOrgsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | AdditionalOrgs$eventsArgs<ExtArgs>
+    _count?: boolean | AdditionalOrgsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AdditionalOrgsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AdditionalOrgsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AdditionalOrgsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdditionalOrgs"
+    objects: {
+      events: Prisma.$EventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      phone: string
+      contactName: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["additionalOrgs"]>
+    composites: {}
+  }
+
+  type AdditionalOrgsGetPayload<S extends boolean | null | undefined | AdditionalOrgsDefaultArgs> = $Result.GetResult<Prisma.$AdditionalOrgsPayload, S>
+
+  type AdditionalOrgsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdditionalOrgsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdditionalOrgsCountAggregateInputType | true
+    }
+
+  export interface AdditionalOrgsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdditionalOrgs'], meta: { name: 'AdditionalOrgs' } }
+    /**
+     * Find zero or one AdditionalOrgs that matches the filter.
+     * @param {AdditionalOrgsFindUniqueArgs} args - Arguments to find a AdditionalOrgs
+     * @example
+     * // Get one AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdditionalOrgsFindUniqueArgs>(args: SelectSubset<T, AdditionalOrgsFindUniqueArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdditionalOrgs that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdditionalOrgsFindUniqueOrThrowArgs} args - Arguments to find a AdditionalOrgs
+     * @example
+     * // Get one AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdditionalOrgsFindUniqueOrThrowArgs>(args: SelectSubset<T, AdditionalOrgsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdditionalOrgs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsFindFirstArgs} args - Arguments to find a AdditionalOrgs
+     * @example
+     * // Get one AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdditionalOrgsFindFirstArgs>(args?: SelectSubset<T, AdditionalOrgsFindFirstArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdditionalOrgs that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsFindFirstOrThrowArgs} args - Arguments to find a AdditionalOrgs
+     * @example
+     * // Get one AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdditionalOrgsFindFirstOrThrowArgs>(args?: SelectSubset<T, AdditionalOrgsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdditionalOrgs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.findMany()
+     * 
+     * // Get first 10 AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const additionalOrgsWithIdOnly = await prisma.additionalOrgs.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdditionalOrgsFindManyArgs>(args?: SelectSubset<T, AdditionalOrgsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdditionalOrgs.
+     * @param {AdditionalOrgsCreateArgs} args - Arguments to create a AdditionalOrgs.
+     * @example
+     * // Create one AdditionalOrgs
+     * const AdditionalOrgs = await prisma.additionalOrgs.create({
+     *   data: {
+     *     // ... data to create a AdditionalOrgs
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdditionalOrgsCreateArgs>(args: SelectSubset<T, AdditionalOrgsCreateArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdditionalOrgs.
+     * @param {AdditionalOrgsCreateManyArgs} args - Arguments to create many AdditionalOrgs.
+     * @example
+     * // Create many AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdditionalOrgsCreateManyArgs>(args?: SelectSubset<T, AdditionalOrgsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdditionalOrgs and returns the data saved in the database.
+     * @param {AdditionalOrgsCreateManyAndReturnArgs} args - Arguments to create many AdditionalOrgs.
+     * @example
+     * // Create many AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdditionalOrgs and only return the `id`
+     * const additionalOrgsWithIdOnly = await prisma.additionalOrgs.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdditionalOrgsCreateManyAndReturnArgs>(args?: SelectSubset<T, AdditionalOrgsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdditionalOrgs.
+     * @param {AdditionalOrgsDeleteArgs} args - Arguments to delete one AdditionalOrgs.
+     * @example
+     * // Delete one AdditionalOrgs
+     * const AdditionalOrgs = await prisma.additionalOrgs.delete({
+     *   where: {
+     *     // ... filter to delete one AdditionalOrgs
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdditionalOrgsDeleteArgs>(args: SelectSubset<T, AdditionalOrgsDeleteArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdditionalOrgs.
+     * @param {AdditionalOrgsUpdateArgs} args - Arguments to update one AdditionalOrgs.
+     * @example
+     * // Update one AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdditionalOrgsUpdateArgs>(args: SelectSubset<T, AdditionalOrgsUpdateArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdditionalOrgs.
+     * @param {AdditionalOrgsDeleteManyArgs} args - Arguments to filter AdditionalOrgs to delete.
+     * @example
+     * // Delete a few AdditionalOrgs
+     * const { count } = await prisma.additionalOrgs.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdditionalOrgsDeleteManyArgs>(args?: SelectSubset<T, AdditionalOrgsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdditionalOrgs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdditionalOrgsUpdateManyArgs>(args: SelectSubset<T, AdditionalOrgsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdditionalOrgs and returns the data updated in the database.
+     * @param {AdditionalOrgsUpdateManyAndReturnArgs} args - Arguments to update many AdditionalOrgs.
+     * @example
+     * // Update many AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdditionalOrgs and only return the `id`
+     * const additionalOrgsWithIdOnly = await prisma.additionalOrgs.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdditionalOrgsUpdateManyAndReturnArgs>(args: SelectSubset<T, AdditionalOrgsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdditionalOrgs.
+     * @param {AdditionalOrgsUpsertArgs} args - Arguments to update or create a AdditionalOrgs.
+     * @example
+     * // Update or create a AdditionalOrgs
+     * const additionalOrgs = await prisma.additionalOrgs.upsert({
+     *   create: {
+     *     // ... data to create a AdditionalOrgs
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdditionalOrgs we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdditionalOrgsUpsertArgs>(args: SelectSubset<T, AdditionalOrgsUpsertArgs<ExtArgs>>): Prisma__AdditionalOrgsClient<$Result.GetResult<Prisma.$AdditionalOrgsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdditionalOrgs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsCountArgs} args - Arguments to filter AdditionalOrgs to count.
+     * @example
+     * // Count the number of AdditionalOrgs
+     * const count = await prisma.additionalOrgs.count({
+     *   where: {
+     *     // ... the filter for the AdditionalOrgs we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdditionalOrgsCountArgs>(
+      args?: Subset<T, AdditionalOrgsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdditionalOrgsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdditionalOrgs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdditionalOrgsAggregateArgs>(args: Subset<T, AdditionalOrgsAggregateArgs>): Prisma.PrismaPromise<GetAdditionalOrgsAggregateType<T>>
+
+    /**
+     * Group by AdditionalOrgs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdditionalOrgsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdditionalOrgsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdditionalOrgsGroupByArgs['orderBy'] }
+        : { orderBy?: AdditionalOrgsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdditionalOrgsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdditionalOrgsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdditionalOrgs model
+   */
+  readonly fields: AdditionalOrgsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdditionalOrgs.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdditionalOrgsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    events<T extends AdditionalOrgs$eventsArgs<ExtArgs> = {}>(args?: Subset<T, AdditionalOrgs$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdditionalOrgs model
+   */
+  interface AdditionalOrgsFieldRefs {
+    readonly id: FieldRef<"AdditionalOrgs", 'String'>
+    readonly name: FieldRef<"AdditionalOrgs", 'String'>
+    readonly phone: FieldRef<"AdditionalOrgs", 'String'>
+    readonly contactName: FieldRef<"AdditionalOrgs", 'String'>
+    readonly createdAt: FieldRef<"AdditionalOrgs", 'DateTime'>
+    readonly updatedAt: FieldRef<"AdditionalOrgs", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdditionalOrgs findUnique
+   */
+  export type AdditionalOrgsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * Filter, which AdditionalOrgs to fetch.
+     */
+    where: AdditionalOrgsWhereUniqueInput
+  }
+
+  /**
+   * AdditionalOrgs findUniqueOrThrow
+   */
+  export type AdditionalOrgsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * Filter, which AdditionalOrgs to fetch.
+     */
+    where: AdditionalOrgsWhereUniqueInput
+  }
+
+  /**
+   * AdditionalOrgs findFirst
+   */
+  export type AdditionalOrgsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * Filter, which AdditionalOrgs to fetch.
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdditionalOrgs to fetch.
+     */
+    orderBy?: AdditionalOrgsOrderByWithRelationInput | AdditionalOrgsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdditionalOrgs.
+     */
+    cursor?: AdditionalOrgsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdditionalOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdditionalOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdditionalOrgs.
+     */
+    distinct?: AdditionalOrgsScalarFieldEnum | AdditionalOrgsScalarFieldEnum[]
+  }
+
+  /**
+   * AdditionalOrgs findFirstOrThrow
+   */
+  export type AdditionalOrgsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * Filter, which AdditionalOrgs to fetch.
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdditionalOrgs to fetch.
+     */
+    orderBy?: AdditionalOrgsOrderByWithRelationInput | AdditionalOrgsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdditionalOrgs.
+     */
+    cursor?: AdditionalOrgsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdditionalOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdditionalOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdditionalOrgs.
+     */
+    distinct?: AdditionalOrgsScalarFieldEnum | AdditionalOrgsScalarFieldEnum[]
+  }
+
+  /**
+   * AdditionalOrgs findMany
+   */
+  export type AdditionalOrgsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * Filter, which AdditionalOrgs to fetch.
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdditionalOrgs to fetch.
+     */
+    orderBy?: AdditionalOrgsOrderByWithRelationInput | AdditionalOrgsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdditionalOrgs.
+     */
+    cursor?: AdditionalOrgsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdditionalOrgs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdditionalOrgs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdditionalOrgs.
+     */
+    distinct?: AdditionalOrgsScalarFieldEnum | AdditionalOrgsScalarFieldEnum[]
+  }
+
+  /**
+   * AdditionalOrgs create
+   */
+  export type AdditionalOrgsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdditionalOrgs.
+     */
+    data: XOR<AdditionalOrgsCreateInput, AdditionalOrgsUncheckedCreateInput>
+  }
+
+  /**
+   * AdditionalOrgs createMany
+   */
+  export type AdditionalOrgsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdditionalOrgs.
+     */
+    data: AdditionalOrgsCreateManyInput | AdditionalOrgsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdditionalOrgs createManyAndReturn
+   */
+  export type AdditionalOrgsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdditionalOrgs.
+     */
+    data: AdditionalOrgsCreateManyInput | AdditionalOrgsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdditionalOrgs update
+   */
+  export type AdditionalOrgsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdditionalOrgs.
+     */
+    data: XOR<AdditionalOrgsUpdateInput, AdditionalOrgsUncheckedUpdateInput>
+    /**
+     * Choose, which AdditionalOrgs to update.
+     */
+    where: AdditionalOrgsWhereUniqueInput
+  }
+
+  /**
+   * AdditionalOrgs updateMany
+   */
+  export type AdditionalOrgsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdditionalOrgs.
+     */
+    data: XOR<AdditionalOrgsUpdateManyMutationInput, AdditionalOrgsUncheckedUpdateManyInput>
+    /**
+     * Filter which AdditionalOrgs to update
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * Limit how many AdditionalOrgs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdditionalOrgs updateManyAndReturn
+   */
+  export type AdditionalOrgsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * The data used to update AdditionalOrgs.
+     */
+    data: XOR<AdditionalOrgsUpdateManyMutationInput, AdditionalOrgsUncheckedUpdateManyInput>
+    /**
+     * Filter which AdditionalOrgs to update
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * Limit how many AdditionalOrgs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdditionalOrgs upsert
+   */
+  export type AdditionalOrgsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdditionalOrgs to update in case it exists.
+     */
+    where: AdditionalOrgsWhereUniqueInput
+    /**
+     * In case the AdditionalOrgs found by the `where` argument doesn't exist, create a new AdditionalOrgs with this data.
+     */
+    create: XOR<AdditionalOrgsCreateInput, AdditionalOrgsUncheckedCreateInput>
+    /**
+     * In case the AdditionalOrgs was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdditionalOrgsUpdateInput, AdditionalOrgsUncheckedUpdateInput>
+  }
+
+  /**
+   * AdditionalOrgs delete
+   */
+  export type AdditionalOrgsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
+    /**
+     * Filter which AdditionalOrgs to delete.
+     */
+    where: AdditionalOrgsWhereUniqueInput
+  }
+
+  /**
+   * AdditionalOrgs deleteMany
+   */
+  export type AdditionalOrgsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdditionalOrgs to delete
+     */
+    where?: AdditionalOrgsWhereInput
+    /**
+     * Limit how many AdditionalOrgs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdditionalOrgs.events
+   */
+  export type AdditionalOrgs$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * AdditionalOrgs without action
+   */
+  export type AdditionalOrgsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdditionalOrgs
+     */
+    select?: AdditionalOrgsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdditionalOrgs
+     */
+    omit?: AdditionalOrgsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdditionalOrgsInclude<ExtArgs> | null
   }
 
 
@@ -11835,6 +13082,18 @@ export namespace Prisma {
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+  export const AdditionalOrgsScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    phone: 'phone',
+    contactName: 'contactName',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdditionalOrgsScalarFieldEnum = (typeof AdditionalOrgsScalarFieldEnum)[keyof typeof AdditionalOrgsScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -12461,6 +13720,7 @@ export namespace Prisma {
     type?: XOR<EventTypeScalarRelationFilter, EventTypeWhereInput>
     location?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
     employees?: EmployeeListRelationFilter
+    additionalOrgs?: AdditionalOrgsListRelationFilter
   }
 
   export type EventOrderByWithRelationInput = {
@@ -12476,6 +13736,7 @@ export namespace Prisma {
     type?: EventTypeOrderByWithRelationInput
     location?: LocationOrderByWithRelationInput
     employees?: EmployeeOrderByRelationAggregateInput
+    additionalOrgs?: AdditionalOrgsOrderByRelationAggregateInput
   }
 
   export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -12494,6 +13755,7 @@ export namespace Prisma {
     type?: XOR<EventTypeScalarRelationFilter, EventTypeWhereInput>
     location?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
     employees?: EmployeeListRelationFilter
+    additionalOrgs?: AdditionalOrgsListRelationFilter
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
@@ -12524,6 +13786,66 @@ export namespace Prisma {
     locationId?: StringNullableWithAggregatesFilter<"Event"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+  }
+
+  export type AdditionalOrgsWhereInput = {
+    AND?: AdditionalOrgsWhereInput | AdditionalOrgsWhereInput[]
+    OR?: AdditionalOrgsWhereInput[]
+    NOT?: AdditionalOrgsWhereInput | AdditionalOrgsWhereInput[]
+    id?: StringFilter<"AdditionalOrgs"> | string
+    name?: StringFilter<"AdditionalOrgs"> | string
+    phone?: StringFilter<"AdditionalOrgs"> | string
+    contactName?: StringFilter<"AdditionalOrgs"> | string
+    createdAt?: DateTimeFilter<"AdditionalOrgs"> | Date | string
+    updatedAt?: DateTimeFilter<"AdditionalOrgs"> | Date | string
+    events?: EventListRelationFilter
+  }
+
+  export type AdditionalOrgsOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    contactName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    events?: EventOrderByRelationAggregateInput
+  }
+
+  export type AdditionalOrgsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    name?: string
+    phone?: string
+    AND?: AdditionalOrgsWhereInput | AdditionalOrgsWhereInput[]
+    OR?: AdditionalOrgsWhereInput[]
+    NOT?: AdditionalOrgsWhereInput | AdditionalOrgsWhereInput[]
+    contactName?: StringFilter<"AdditionalOrgs"> | string
+    createdAt?: DateTimeFilter<"AdditionalOrgs"> | Date | string
+    updatedAt?: DateTimeFilter<"AdditionalOrgs"> | Date | string
+    events?: EventListRelationFilter
+  }, "id" | "name" | "phone">
+
+  export type AdditionalOrgsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    contactName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdditionalOrgsCountOrderByAggregateInput
+    _max?: AdditionalOrgsMaxOrderByAggregateInput
+    _min?: AdditionalOrgsMinOrderByAggregateInput
+  }
+
+  export type AdditionalOrgsScalarWhereWithAggregatesInput = {
+    AND?: AdditionalOrgsScalarWhereWithAggregatesInput | AdditionalOrgsScalarWhereWithAggregatesInput[]
+    OR?: AdditionalOrgsScalarWhereWithAggregatesInput[]
+    NOT?: AdditionalOrgsScalarWhereWithAggregatesInput | AdditionalOrgsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AdditionalOrgs"> | string
+    name?: StringWithAggregatesFilter<"AdditionalOrgs"> | string
+    phone?: StringWithAggregatesFilter<"AdditionalOrgs"> | string
+    contactName?: StringWithAggregatesFilter<"AdditionalOrgs"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AdditionalOrgs"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AdditionalOrgs"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -13104,6 +14426,7 @@ export namespace Prisma {
     type: EventTypeCreateNestedOneWithoutEventsInput
     location?: LocationCreateNestedOneWithoutEventsInput
     employees?: EmployeeCreateNestedManyWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsCreateNestedManyWithoutEventsInput
   }
 
   export type EventUncheckedCreateInput = {
@@ -13117,6 +14440,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     employees?: EmployeeUncheckedCreateNestedManyWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsUncheckedCreateNestedManyWithoutEventsInput
   }
 
   export type EventUpdateInput = {
@@ -13130,6 +14454,7 @@ export namespace Prisma {
     type?: EventTypeUpdateOneRequiredWithoutEventsNestedInput
     location?: LocationUpdateOneWithoutEventsNestedInput
     employees?: EmployeeUpdateManyWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
@@ -13143,6 +14468,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employees?: EmployeeUncheckedUpdateManyWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUncheckedUpdateManyWithoutEventsNestedInput
   }
 
   export type EventCreateManyInput = {
@@ -13175,6 +14501,73 @@ export namespace Prisma {
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     typeId?: StringFieldUpdateOperationsInput | string
     locationId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdditionalOrgsCreateInput = {
+    id?: string
+    name: string
+    phone: string
+    contactName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    events?: EventCreateNestedManyWithoutAdditionalOrgsInput
+  }
+
+  export type AdditionalOrgsUncheckedCreateInput = {
+    id?: string
+    name: string
+    phone: string
+    contactName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    events?: EventUncheckedCreateNestedManyWithoutAdditionalOrgsInput
+  }
+
+  export type AdditionalOrgsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    events?: EventUpdateManyWithoutAdditionalOrgsNestedInput
+  }
+
+  export type AdditionalOrgsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    events?: EventUncheckedUpdateManyWithoutAdditionalOrgsNestedInput
+  }
+
+  export type AdditionalOrgsCreateManyInput = {
+    id?: string
+    name: string
+    phone: string
+    contactName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdditionalOrgsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdditionalOrgsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13624,6 +15017,16 @@ export namespace Prisma {
     isNot?: LocationWhereInput | null
   }
 
+  export type AdditionalOrgsListRelationFilter = {
+    every?: AdditionalOrgsWhereInput
+    some?: AdditionalOrgsWhereInput
+    none?: AdditionalOrgsWhereInput
+  }
+
+  export type AdditionalOrgsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type EventCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
@@ -13656,6 +15059,33 @@ export namespace Prisma {
     endAt?: SortOrder
     typeId?: SortOrder
     locationId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdditionalOrgsCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    contactName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdditionalOrgsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    contactName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdditionalOrgsMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    phone?: SortOrder
+    contactName?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13992,10 +15422,22 @@ export namespace Prisma {
     connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
   }
 
+  export type AdditionalOrgsCreateNestedManyWithoutEventsInput = {
+    create?: XOR<AdditionalOrgsCreateWithoutEventsInput, AdditionalOrgsUncheckedCreateWithoutEventsInput> | AdditionalOrgsCreateWithoutEventsInput[] | AdditionalOrgsUncheckedCreateWithoutEventsInput[]
+    connectOrCreate?: AdditionalOrgsCreateOrConnectWithoutEventsInput | AdditionalOrgsCreateOrConnectWithoutEventsInput[]
+    connect?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+  }
+
   export type EmployeeUncheckedCreateNestedManyWithoutEventsInput = {
     create?: XOR<EmployeeCreateWithoutEventsInput, EmployeeUncheckedCreateWithoutEventsInput> | EmployeeCreateWithoutEventsInput[] | EmployeeUncheckedCreateWithoutEventsInput[]
     connectOrCreate?: EmployeeCreateOrConnectWithoutEventsInput | EmployeeCreateOrConnectWithoutEventsInput[]
     connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
+  export type AdditionalOrgsUncheckedCreateNestedManyWithoutEventsInput = {
+    create?: XOR<AdditionalOrgsCreateWithoutEventsInput, AdditionalOrgsUncheckedCreateWithoutEventsInput> | AdditionalOrgsCreateWithoutEventsInput[] | AdditionalOrgsUncheckedCreateWithoutEventsInput[]
+    connectOrCreate?: AdditionalOrgsCreateOrConnectWithoutEventsInput | AdditionalOrgsCreateOrConnectWithoutEventsInput[]
+    connect?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
   }
 
   export type EventTypeUpdateOneRequiredWithoutEventsNestedInput = {
@@ -14029,6 +15471,19 @@ export namespace Prisma {
     deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
+  export type AdditionalOrgsUpdateManyWithoutEventsNestedInput = {
+    create?: XOR<AdditionalOrgsCreateWithoutEventsInput, AdditionalOrgsUncheckedCreateWithoutEventsInput> | AdditionalOrgsCreateWithoutEventsInput[] | AdditionalOrgsUncheckedCreateWithoutEventsInput[]
+    connectOrCreate?: AdditionalOrgsCreateOrConnectWithoutEventsInput | AdditionalOrgsCreateOrConnectWithoutEventsInput[]
+    upsert?: AdditionalOrgsUpsertWithWhereUniqueWithoutEventsInput | AdditionalOrgsUpsertWithWhereUniqueWithoutEventsInput[]
+    set?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    disconnect?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    delete?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    connect?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    update?: AdditionalOrgsUpdateWithWhereUniqueWithoutEventsInput | AdditionalOrgsUpdateWithWhereUniqueWithoutEventsInput[]
+    updateMany?: AdditionalOrgsUpdateManyWithWhereWithoutEventsInput | AdditionalOrgsUpdateManyWithWhereWithoutEventsInput[]
+    deleteMany?: AdditionalOrgsScalarWhereInput | AdditionalOrgsScalarWhereInput[]
+  }
+
   export type EmployeeUncheckedUpdateManyWithoutEventsNestedInput = {
     create?: XOR<EmployeeCreateWithoutEventsInput, EmployeeUncheckedCreateWithoutEventsInput> | EmployeeCreateWithoutEventsInput[] | EmployeeUncheckedCreateWithoutEventsInput[]
     connectOrCreate?: EmployeeCreateOrConnectWithoutEventsInput | EmployeeCreateOrConnectWithoutEventsInput[]
@@ -14040,6 +15495,57 @@ export namespace Prisma {
     update?: EmployeeUpdateWithWhereUniqueWithoutEventsInput | EmployeeUpdateWithWhereUniqueWithoutEventsInput[]
     updateMany?: EmployeeUpdateManyWithWhereWithoutEventsInput | EmployeeUpdateManyWithWhereWithoutEventsInput[]
     deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
+  export type AdditionalOrgsUncheckedUpdateManyWithoutEventsNestedInput = {
+    create?: XOR<AdditionalOrgsCreateWithoutEventsInput, AdditionalOrgsUncheckedCreateWithoutEventsInput> | AdditionalOrgsCreateWithoutEventsInput[] | AdditionalOrgsUncheckedCreateWithoutEventsInput[]
+    connectOrCreate?: AdditionalOrgsCreateOrConnectWithoutEventsInput | AdditionalOrgsCreateOrConnectWithoutEventsInput[]
+    upsert?: AdditionalOrgsUpsertWithWhereUniqueWithoutEventsInput | AdditionalOrgsUpsertWithWhereUniqueWithoutEventsInput[]
+    set?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    disconnect?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    delete?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    connect?: AdditionalOrgsWhereUniqueInput | AdditionalOrgsWhereUniqueInput[]
+    update?: AdditionalOrgsUpdateWithWhereUniqueWithoutEventsInput | AdditionalOrgsUpdateWithWhereUniqueWithoutEventsInput[]
+    updateMany?: AdditionalOrgsUpdateManyWithWhereWithoutEventsInput | AdditionalOrgsUpdateManyWithWhereWithoutEventsInput[]
+    deleteMany?: AdditionalOrgsScalarWhereInput | AdditionalOrgsScalarWhereInput[]
+  }
+
+  export type EventCreateNestedManyWithoutAdditionalOrgsInput = {
+    create?: XOR<EventCreateWithoutAdditionalOrgsInput, EventUncheckedCreateWithoutAdditionalOrgsInput> | EventCreateWithoutAdditionalOrgsInput[] | EventUncheckedCreateWithoutAdditionalOrgsInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAdditionalOrgsInput | EventCreateOrConnectWithoutAdditionalOrgsInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutAdditionalOrgsInput = {
+    create?: XOR<EventCreateWithoutAdditionalOrgsInput, EventUncheckedCreateWithoutAdditionalOrgsInput> | EventCreateWithoutAdditionalOrgsInput[] | EventUncheckedCreateWithoutAdditionalOrgsInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAdditionalOrgsInput | EventCreateOrConnectWithoutAdditionalOrgsInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUpdateManyWithoutAdditionalOrgsNestedInput = {
+    create?: XOR<EventCreateWithoutAdditionalOrgsInput, EventUncheckedCreateWithoutAdditionalOrgsInput> | EventCreateWithoutAdditionalOrgsInput[] | EventUncheckedCreateWithoutAdditionalOrgsInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAdditionalOrgsInput | EventCreateOrConnectWithoutAdditionalOrgsInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutAdditionalOrgsInput | EventUpsertWithWhereUniqueWithoutAdditionalOrgsInput[]
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutAdditionalOrgsInput | EventUpdateWithWhereUniqueWithoutAdditionalOrgsInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutAdditionalOrgsInput | EventUpdateManyWithWhereWithoutAdditionalOrgsInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutAdditionalOrgsNestedInput = {
+    create?: XOR<EventCreateWithoutAdditionalOrgsInput, EventUncheckedCreateWithoutAdditionalOrgsInput> | EventCreateWithoutAdditionalOrgsInput[] | EventUncheckedCreateWithoutAdditionalOrgsInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutAdditionalOrgsInput | EventCreateOrConnectWithoutAdditionalOrgsInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutAdditionalOrgsInput | EventUpsertWithWhereUniqueWithoutAdditionalOrgsInput[]
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutAdditionalOrgsInput | EventUpdateWithWhereUniqueWithoutAdditionalOrgsInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutAdditionalOrgsInput | EventUpdateManyWithWhereWithoutAdditionalOrgsInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -14551,6 +16057,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     type: EventTypeCreateNestedOneWithoutEventsInput
     location?: LocationCreateNestedOneWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsCreateNestedManyWithoutEventsInput
   }
 
   export type EventUncheckedCreateWithoutEmployeesInput = {
@@ -14563,6 +16070,7 @@ export namespace Prisma {
     locationId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    additionalOrgs?: AdditionalOrgsUncheckedCreateNestedManyWithoutEventsInput
   }
 
   export type EventCreateOrConnectWithoutEmployeesInput = {
@@ -14636,6 +16144,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     location?: LocationCreateNestedOneWithoutEventsInput
     employees?: EmployeeCreateNestedManyWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsCreateNestedManyWithoutEventsInput
   }
 
   export type EventUncheckedCreateWithoutTypeInput = {
@@ -14648,6 +16157,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     employees?: EmployeeUncheckedCreateNestedManyWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsUncheckedCreateNestedManyWithoutEventsInput
   }
 
   export type EventCreateOrConnectWithoutTypeInput = {
@@ -14686,6 +16196,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     type: EventTypeCreateNestedOneWithoutEventsInput
     employees?: EmployeeCreateNestedManyWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsCreateNestedManyWithoutEventsInput
   }
 
   export type EventUncheckedCreateWithoutLocationInput = {
@@ -14698,6 +16209,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     employees?: EmployeeUncheckedCreateNestedManyWithoutEventsInput
+    additionalOrgs?: AdditionalOrgsUncheckedCreateNestedManyWithoutEventsInput
   }
 
   export type EventCreateOrConnectWithoutLocationInput = {
@@ -14789,6 +16301,29 @@ export namespace Prisma {
     create: XOR<EmployeeCreateWithoutEventsInput, EmployeeUncheckedCreateWithoutEventsInput>
   }
 
+  export type AdditionalOrgsCreateWithoutEventsInput = {
+    id?: string
+    name: string
+    phone: string
+    contactName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdditionalOrgsUncheckedCreateWithoutEventsInput = {
+    id?: string
+    name: string
+    phone: string
+    contactName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdditionalOrgsCreateOrConnectWithoutEventsInput = {
+    where: AdditionalOrgsWhereUniqueInput
+    create: XOR<AdditionalOrgsCreateWithoutEventsInput, AdditionalOrgsUncheckedCreateWithoutEventsInput>
+  }
+
   export type EventTypeUpsertWithoutEventsInput = {
     update: XOR<EventTypeUpdateWithoutEventsInput, EventTypeUncheckedUpdateWithoutEventsInput>
     create: XOR<EventTypeCreateWithoutEventsInput, EventTypeUncheckedCreateWithoutEventsInput>
@@ -14857,6 +16392,81 @@ export namespace Prisma {
   export type EmployeeUpdateManyWithWhereWithoutEventsInput = {
     where: EmployeeScalarWhereInput
     data: XOR<EmployeeUpdateManyMutationInput, EmployeeUncheckedUpdateManyWithoutEventsInput>
+  }
+
+  export type AdditionalOrgsUpsertWithWhereUniqueWithoutEventsInput = {
+    where: AdditionalOrgsWhereUniqueInput
+    update: XOR<AdditionalOrgsUpdateWithoutEventsInput, AdditionalOrgsUncheckedUpdateWithoutEventsInput>
+    create: XOR<AdditionalOrgsCreateWithoutEventsInput, AdditionalOrgsUncheckedCreateWithoutEventsInput>
+  }
+
+  export type AdditionalOrgsUpdateWithWhereUniqueWithoutEventsInput = {
+    where: AdditionalOrgsWhereUniqueInput
+    data: XOR<AdditionalOrgsUpdateWithoutEventsInput, AdditionalOrgsUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type AdditionalOrgsUpdateManyWithWhereWithoutEventsInput = {
+    where: AdditionalOrgsScalarWhereInput
+    data: XOR<AdditionalOrgsUpdateManyMutationInput, AdditionalOrgsUncheckedUpdateManyWithoutEventsInput>
+  }
+
+  export type AdditionalOrgsScalarWhereInput = {
+    AND?: AdditionalOrgsScalarWhereInput | AdditionalOrgsScalarWhereInput[]
+    OR?: AdditionalOrgsScalarWhereInput[]
+    NOT?: AdditionalOrgsScalarWhereInput | AdditionalOrgsScalarWhereInput[]
+    id?: StringFilter<"AdditionalOrgs"> | string
+    name?: StringFilter<"AdditionalOrgs"> | string
+    phone?: StringFilter<"AdditionalOrgs"> | string
+    contactName?: StringFilter<"AdditionalOrgs"> | string
+    createdAt?: DateTimeFilter<"AdditionalOrgs"> | Date | string
+    updatedAt?: DateTimeFilter<"AdditionalOrgs"> | Date | string
+  }
+
+  export type EventCreateWithoutAdditionalOrgsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startAt: Date | string
+    endAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    type: EventTypeCreateNestedOneWithoutEventsInput
+    location?: LocationCreateNestedOneWithoutEventsInput
+    employees?: EmployeeCreateNestedManyWithoutEventsInput
+  }
+
+  export type EventUncheckedCreateWithoutAdditionalOrgsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    startAt: Date | string
+    endAt: Date | string
+    typeId: string
+    locationId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    employees?: EmployeeUncheckedCreateNestedManyWithoutEventsInput
+  }
+
+  export type EventCreateOrConnectWithoutAdditionalOrgsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutAdditionalOrgsInput, EventUncheckedCreateWithoutAdditionalOrgsInput>
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutAdditionalOrgsInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutAdditionalOrgsInput, EventUncheckedUpdateWithoutAdditionalOrgsInput>
+    create: XOR<EventCreateWithoutAdditionalOrgsInput, EventUncheckedCreateWithoutAdditionalOrgsInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutAdditionalOrgsInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutAdditionalOrgsInput, EventUncheckedUpdateWithoutAdditionalOrgsInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutAdditionalOrgsInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutAdditionalOrgsInput>
   }
 
   export type SessionCreateManyUserInput = {
@@ -14999,6 +16609,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EventTypeUpdateOneRequiredWithoutEventsNestedInput
     location?: LocationUpdateOneWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutEmployeesInput = {
@@ -15011,6 +16622,7 @@ export namespace Prisma {
     locationId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    additionalOrgs?: AdditionalOrgsUncheckedUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateManyWithoutEmployeesInput = {
@@ -15046,6 +16658,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     location?: LocationUpdateOneWithoutEventsNestedInput
     employees?: EmployeeUpdateManyWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutTypeInput = {
@@ -15058,6 +16671,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employees?: EmployeeUncheckedUpdateManyWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUncheckedUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateManyWithoutTypeInput = {
@@ -15092,6 +16706,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     type?: EventTypeUpdateOneRequiredWithoutEventsNestedInput
     employees?: EmployeeUpdateManyWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutLocationInput = {
@@ -15104,6 +16719,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employees?: EmployeeUncheckedUpdateManyWithoutEventsNestedInput
+    additionalOrgs?: AdditionalOrgsUncheckedUpdateManyWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateManyWithoutLocationInput = {
@@ -15137,6 +16753,71 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     employeeTypeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdditionalOrgsUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdditionalOrgsUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdditionalOrgsUncheckedUpdateManyWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    contactName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EventUpdateWithoutAdditionalOrgsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    type?: EventTypeUpdateOneRequiredWithoutEventsNestedInput
+    location?: LocationUpdateOneWithoutEventsNestedInput
+    employees?: EmployeeUpdateManyWithoutEventsNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutAdditionalOrgsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    typeId?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    employees?: EmployeeUncheckedUpdateManyWithoutEventsNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutAdditionalOrgsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    startAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    endAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    typeId?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

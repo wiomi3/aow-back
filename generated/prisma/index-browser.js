@@ -210,6 +210,15 @@ exports.Prisma.EventScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AdditionalOrgsScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  contactName: 'contactName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -238,7 +247,8 @@ exports.Prisma.ModelName = {
   Employee: 'Employee',
   EventType: 'EventType',
   Location: 'Location',
-  Event: 'Event'
+  Event: 'Event',
+  AdditionalOrgs: 'AdditionalOrgs'
 };
 
 /**

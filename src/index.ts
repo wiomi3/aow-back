@@ -53,6 +53,7 @@ import locations from './routes/admin/locations.js';
 import eventTypes from './routes/admin/event-types.js';
 import employees from './routes/admin/employees.js';
 import employeeTypes from './routes/admin/employee-types.js';
+import additionalOrgs from './routes/admin/additional-orgs.js';
 
 app.route('/api/events', events);
 app.route('/api/event-types', eventTypesPublic);
@@ -64,6 +65,7 @@ app.route('/api/admin/locations', locations);
 app.route('/api/admin/event-types', eventTypes);
 app.route('/api/admin/employees', employees);
 app.route('/api/admin/employee-types', employeeTypes);
+app.route('/api/admin/additional-orgs', additionalOrgs);
 
 // Swagger UI
 app.doc('/openapi.json', {

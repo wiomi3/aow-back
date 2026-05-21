@@ -46,6 +46,7 @@ events.openapi(getEventsRoute, async (c) => {
           employeeType: true,
         },
       },
+      additionalOrgs: true,
     },
   });
 

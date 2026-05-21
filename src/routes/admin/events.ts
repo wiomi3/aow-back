@@ -12,6 +12,7 @@ const includeDetails = {
       employeeType: true,
     },
   },
+  additionalOrgs: true,
 };
 
 async function checkCollisions(
@@ -179,7 +180,7 @@ const deleteEventRoute = createRoute({
 });
 
 events.openapi(createEventRoute, async (c) => {
-  const { title, description, startAt, endAt, typeId, locationId, employeeIds } =
+  const { title, description, startAt, endAt, typeId, locationId, employeeIds, additionalOrgIds } =
     c.req.valid('json');
 
   const start = new Date(startAt);
@@ -201,6 +202,9 @@ events.openapi(createEventRoute, async (c) => {
       employees: {
         connect: employeeIds?.map((id: string) => ({ id })),
       },
+      additionalOrgs: {
+        connect: additionalOrgIds?.map((id: string) => ({ id })),
+      },
     },
     include: includeDetails,
   });
@@ -209,7 +213,7 @@ events.openapi(createEventRoute, async (c) => {
 
 events.openapi(updateEventRoute, async (c) => {
   const { id } = c.req.valid('param');
-  const { title, description, startAt, endAt, typeId, locationId, employeeIds } =
+  const { title, description, startAt, endAt, typeId, locationId, employeeIds, additionalOrgIds } =
     c.req.valid('json');
 
   const start = new Date(startAt);
@@ -231,6 +235,9 @@ events.openapi(updateEventRoute, async (c) => {
       locationId,
       employees: {
         set: employeeIds?.map((id: string) => ({ id })),
+      },
+      additionalOrgs: {
+        set: additionalOrgIds?.map((id: string) => ({ id })) ?? [],
       },
     },
     include: includeDetails,

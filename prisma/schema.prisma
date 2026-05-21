@@ -133,9 +133,22 @@ model Event {
   locationId String?
 
   employees Employee[]
+  additionalOrgs AdditionalOrgs[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([startAt, endAt])
+}
+
+model AdditionalOrgs {
+    id          String  @id @default(uuid())
+    name String @unique
+    phone String @unique
+    contactName String
+
+    events         Event[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

@@ -7,8 +7,8 @@ export const employeeTypeInputSchema = z.object({
 });
 export const employeeTypeResponseSchema = employeeTypeInputSchema.extend({
     id: z.string().uuid().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
-    createdAt: z.string().datetime(),
-    updatedAt: z.string().datetime(),
+    createdAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime(),
 }).openapi('EmployeeType');
 // Alias for compatibility with existing routes
 export const EmployeeTypeSchema = employeeTypeResponseSchema;
@@ -21,8 +21,8 @@ export const employeeInputSchema = z.object({
 });
 export const employeeResponseSchema = employeeInputSchema.extend({
     id: z.string().uuid().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
-    createdAt: z.string().datetime(),
-    updatedAt: z.string().datetime(),
+    createdAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime(),
     employeeType: employeeTypeResponseSchema.optional(),
 }).openapi('Employee');
 export const employeeWithDetailsResponseSchema = employeeResponseSchema.extend({
@@ -39,8 +39,8 @@ export const eventTypeInputSchema = z.object({
 });
 export const eventTypeResponseSchema = eventTypeInputSchema.extend({
     id: z.string().uuid().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
-    createdAt: z.string().datetime(),
-    updatedAt: z.string().datetime(),
+    createdAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime(),
 }).openapi('EventType');
 // Alias for compatibility with existing routes
 export const EventTypeSchema = eventTypeResponseSchema;
@@ -53,8 +53,8 @@ export const locationInputSchema = z.object({
 });
 export const locationResponseSchema = locationInputSchema.extend({
     id: z.string().uuid().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
-    createdAt: z.string().datetime(),
-    updatedAt: z.string().datetime(),
+    createdAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime(),
 }).openapi('Location');
 // Alias for compatibility with existing routes
 export const LocationSchema = locationResponseSchema;
@@ -65,8 +65,8 @@ export const eventInputSchema = z
     .object({
     title: z.string().min(3, 'Название события обязательно').trim().openapi({ example: 'Вечерний джаз' }),
     description: z.string().nullable().optional().openapi({ example: 'Живая музыка и уютная атмосфера' }),
-    startAt: z.string().datetime({ message: 'Ожидается валидная дата начала (ISO 8601)' }).openapi({ example: '2026-05-20T18:00:00Z' }),
-    endAt: z.string().datetime({ message: 'Ожидается валидная дата окончания (ISO 8601)' }).openapi({ example: '2026-05-20T20:00:00Z' }),
+    startAt: z.iso.datetime({ message: 'Ожидается валидная дата начала (ISO 8601)' }).openapi({ example: '2026-05-20T18:00:00Z' }),
+    endAt: z.iso.datetime({ message: 'Ожидается валидная дата окончания (ISO 8601)' }).openapi({ example: '2026-05-20T20:00:00Z' }),
     typeId: z.string().uuid('Выберите тип события').openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
     locationId: z.string().uuid('Выберите локацию').nullable().optional().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
     employeeIds: z
@@ -87,12 +87,12 @@ export const eventResponseSchema = z.object({
     id: z.string().uuid().openapi({ example: '123e4567-e89b-12d3-a456-426614174000' }),
     title: z.string(),
     description: z.string().nullable(),
-    startAt: z.string().datetime(),
-    endAt: z.string().datetime(),
+    startAt: z.iso.datetime(),
+    endAt: z.iso.datetime(),
     typeId: z.string().uuid(),
     locationId: z.string().uuid().nullable(),
-    createdAt: z.string().datetime(),
-    updatedAt: z.string().datetime(),
+    createdAt: z.iso.datetime(),
+    updatedAt: z.iso.datetime(),
     type: eventTypeResponseSchema.optional(),
     location: locationResponseSchema.nullable().optional(),
     employees: z.array(employeeResponseSchema).optional(),
