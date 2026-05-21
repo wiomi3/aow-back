@@ -1,8 +1,18 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { prisma } from '../../../prisma/client.js';
-import { EventSchema, eventInputSchema } from '../../schemas.js';
+import { EventWithDetailsSchema, eventInputSchema } from '../../schemas.js';
 
 const events = new OpenAPIHono();
+
+const includeDetails = {
+  type: true,
+  location: true,
+  employees: {
+    include: {
+      employeeType: true,
+    },
+  },
+};
 
 async function checkCollisions(
   employeeIds: string[],
@@ -51,7 +61,7 @@ const getEventsRoute = createRoute({
   },
   responses: {
     200: {
-      content: { 'application/json': { schema: z.array(EventSchema) } },
+      content: { 'application/json': { schema: z.array(EventWithDetailsSchema) } },
       description: 'Get all events',
     },
   },
@@ -65,7 +75,7 @@ const getEventByIdRoute = createRoute({
   },
   responses: {
     200: {
-      content: { 'application/json': { schema: EventSchema } },
+      content: { 'application/json': { schema: EventWithDetailsSchema } },
       description: 'Get event by id',
     },
     404: {
@@ -85,15 +95,7 @@ events.openapi(getEventsRoute, async (c) => {
 
   const data = await prisma.event.findMany({
     where: whereClause,
-    include: {
-      type: true,
-      location: true,
-      employees: {
-        include: {
-          employeeType: true,
-        },
-      },
-    },
+    include: includeDetails,
   });
 
   return c.json(data as any);
@@ -104,15 +106,7 @@ events.openapi(getEventByIdRoute, async (c) => {
 
   const data = await prisma.event.findUnique({
     where: { id },
-    include: {
-      type: true,
-      location: true,
-      employees: {
-        include: {
-          employeeType: true,
-        },
-      },
-    },
+    include: includeDetails,
   });
 
   if (!data) {
@@ -135,7 +129,7 @@ const createEventRoute = createRoute({
   },
   responses: {
     200: {
-      content: { 'application/json': { schema: EventSchema } },
+      content: { 'application/json': { schema: EventWithDetailsSchema } },
       description: 'Event created successfully',
     },
     409: {
@@ -160,7 +154,7 @@ const updateEventRoute = createRoute({
   },
   responses: {
     200: {
-      content: { 'application/json': { schema: EventSchema } },
+      content: { 'application/json': { schema: EventWithDetailsSchema } },
       description: 'Event updated successfully',
     },
     409: {
@@ -208,6 +202,7 @@ events.openapi(createEventRoute, async (c) => {
         connect: employeeIds?.map((id: string) => ({ id })),
       },
     },
+    include: includeDetails,
   });
   return c.json(data as any);
 });
@@ -238,6 +233,7 @@ events.openapi(updateEventRoute, async (c) => {
         set: employeeIds?.map((id: string) => ({ id })),
       },
     },
+    include: includeDetails,
   });
   return c.json(data as any);
 });

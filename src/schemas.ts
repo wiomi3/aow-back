@@ -37,8 +37,13 @@ export const employeeResponseSchema = employeeInputSchema.extend({
   employeeType: employeeTypeResponseSchema.optional(),
 }).openapi('Employee');
 
+export const employeeWithDetailsResponseSchema = employeeResponseSchema.extend({
+  employeeType: employeeTypeResponseSchema,
+}).openapi('EmployeeWithDetails');
+
 export type EmployeeInputDTO = z.infer<typeof employeeInputSchema>;
 export type EmployeeResponseDTO = z.infer<typeof employeeResponseSchema>;
+export type EmployeeWithDetailsResponseDTO = z.infer<typeof employeeWithDetailsResponseSchema>;
 
 // Alias for compatibility with existing routes
 export const EmployeeSchema = employeeResponseSchema;
@@ -130,8 +135,16 @@ export const eventResponseSchema = z.object({
   employees: z.array(employeeResponseSchema).optional(),
 }).openapi('Event');
 
+export const eventWithDetailsResponseSchema = eventResponseSchema.extend({
+  type: eventTypeResponseSchema,
+  location: locationResponseSchema.nullable(),
+  employees: z.array(employeeWithDetailsResponseSchema),
+}).openapi('EventWithDetails');
+
 export type EventInputDTO = z.infer<typeof eventInputSchema>;
 export type EventResponseDTO = z.infer<typeof eventResponseSchema>;
+export type EventWithDetailsResponseDTO = z.infer<typeof eventWithDetailsResponseSchema>;
 
 // Alias for compatibility with existing routes
 export const EventSchema = eventResponseSchema;
+export const EventWithDetailsSchema = eventWithDetailsResponseSchema;
