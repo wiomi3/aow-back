@@ -1,7 +1,17 @@
 import 'dotenv/config';
-import { prisma } from "./client.js";
+import { prisma } from './client.js';
 async function main() {
     console.log('Starting seeding...');
+    // --- ОЧИСТКА БАЗЫ ДАННЫХ ---
+    console.log('Cleaning up database...');
+    // Удаляем в правильном порядке, чтобы избежать ошибок внешних ключей (Foreign Key Constraints)
+    await prisma.event.deleteMany({});
+    await prisma.employee.deleteMany({});
+    await prisma.employeeType.deleteMany({});
+    await prisma.eventType.deleteMany({});
+    await prisma.location.deleteMany({});
+    console.log('Database cleared successfully.');
+    // ---------------------------
     // 1. EmployeeTypes
     const singer = await prisma.employeeType.upsert({
         where: { name: 'Певец' },
@@ -34,7 +44,7 @@ async function main() {
     });
     const employee3 = await prisma.employee.create({
         data: {
-            name: 'Мария Пидорова',
+            name: 'Мария Пидорова', // Оставил как в оригинале, но обрати внимание на опечатку/содержание :)
             employeeTypeId: animator.id,
         },
     });

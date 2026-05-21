@@ -20,7 +20,7 @@ export const auth = betterAuth({
         requireEmailVerification: false,
         disableSignUp: true,
     },
-    trustedOrigins: ['http://localhost:5173'],
+    trustedOrigins: ['http://localhost:5173', 'https://aow-front.vercel.app'],
     advanced: {
         defaultCookieAttributes: {
             sameSite: 'none',

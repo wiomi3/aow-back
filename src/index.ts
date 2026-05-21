@@ -47,6 +47,7 @@ app.on(['POST', 'GET'], '/api/auth/*', (c) => {
 
 // Routes
 import events from './routes/events.js';
+import eventTypesPublic from './routes/event-types.js';
 import adminEvents from './routes/admin/events.js';
 import locations from './routes/admin/locations.js';
 import eventTypes from './routes/admin/event-types.js';
@@ -54,6 +55,7 @@ import employees from './routes/admin/employees.js';
 import employeeTypes from './routes/admin/employee-types.js';
 
 app.route('/api/events', events);
+app.route('/api/event-types', eventTypesPublic);
 
 // Protected admin routes
 app.use('/api/admin/*', adminMiddleware);
